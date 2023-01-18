@@ -34,7 +34,7 @@ namespace LogArchiver
                     {
                         if (file.EndsWith(".tar.gz"))
                         {
-                            Log.Debug($"{file} - {File.GetCreationTimeUtc(file)}", plugin.Config.Debug);
+                            Log.Debug($"{file} - {File.GetCreationTimeUtc(file)}");
                             dict[directory].Add(new Tuple<string, DateTime>(file, File.GetCreationTimeUtc(file)));
                         }
                     }
@@ -52,7 +52,7 @@ namespace LogArchiver
         {
             foreach (string directory in plugin.Config.LogLocations)
             {
-                Log.Debug($"Checking {directory}..", plugin.Config.Debug);
+                Log.Debug($"Checking {directory}..");
                 if (!Directory.Exists(directory))
                 {
                     Log.Warn($"{directory} does not exist. Skipping.");
@@ -61,7 +61,7 @@ namespace LogArchiver
 
                 string[] fileNames = Directory.GetFiles(directory);
 
-                Log.Debug($"{directory} count: {fileNames.Length}", plugin.Config.Debug);
+                Log.Debug($"{directory} count: {fileNames.Length}");
                 if (fileNames.Length >= plugin.Config.FileLimit)
                     ArchiveFiles(directory);
 
@@ -142,14 +142,14 @@ namespace LogArchiver
             {
                 if (plugin.ExistingArchives.ContainsKey(directory))
                 {
-                    Log.Debug($"Checking {directory} archives..", plugin.Config.Debug);
+                    Log.Debug($"Checking {directory} archives..");
 
                     if (plugin.ExistingArchives[directory].Count + 1 >= plugin.Config.ArchiveLimit)
                     {
-                        Log.Debug($"{plugin.ExistingArchives[directory].Count + 1}", plugin.Config.Debug);
+                        Log.Debug($"{plugin.ExistingArchives[directory].Count + 1}");
                         string toDelete = plugin.ExistingArchives[directory].OrderBy(x => x.Item2).FirstOrDefault()
                             ?.Item1;
-                        Log.Debug($"{toDelete}", plugin.Config.Debug);
+                        Log.Debug($"{toDelete}");
                         if (!string.IsNullOrEmpty(toDelete))
                             File.Delete(toDelete);
                     }

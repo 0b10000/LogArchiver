@@ -21,7 +21,7 @@ namespace LogArchiver
         public override string Name { get; } = "LogArchiver";
         public override string Prefix { get; } = "LogArchiver";
         public override Version Version { get; } = new Version(1, 0, 0);
-        public override Version RequiredExiledVersion { get; } = new Version(2, 1, 18);
+        public override Version RequiredExiledVersion { get; } = new Version(6, 0, 0);
 
         public Methods Methods { get; private set; }
         public EventHandlers EventHandlers { get; private set; }
@@ -33,7 +33,7 @@ namespace LogArchiver
             EventHandlers = new EventHandlers(this);
             Methods = new Methods(this);
 
-            Log.Debug("Scanning for existing archives..", Config.Debug);
+            Log.Debug("Scanning for existing archives..");
             ExistingArchives = Methods.FindExistingArchives();
 
             Log.Info($"Checking log files for given directories. If this is the first time you've used this plugin, this may take a few minutes.");
